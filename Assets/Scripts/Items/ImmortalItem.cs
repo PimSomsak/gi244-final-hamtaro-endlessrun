@@ -17,7 +17,7 @@ public class ImmortalItem : MonoBehaviour
             playerRef.TriggerImmortal();
 
             Debug.Log("✅ Player picked up Immortal Item");
-            Destroy(gameObject); // ทำลายไอเทมหลังชนแล้ว
+            SpawnManagerPool.GetInstance().Return(gameObject); // ทำลายไอเทมหลังชนแล้ว
         }
     }
 }

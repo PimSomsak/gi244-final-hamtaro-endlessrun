@@ -4,20 +4,22 @@ public class ItemHealth : MonoBehaviour
 {
     private PlayerController playerRef;
 
-    // กำหนด Layer ที่จะตรวจสอบ เช่น "Player" = Layer 6
-    
+    [SerializeField] private string playerTag = "Player"; // Tag ของผู้เล่น
 
     private void Start()
     {
-        playerRef = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerRef = GameObject.FindWithTag(playerTag).GetComponent<PlayerController>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(playerTag))
         {
             playerRef.hp += 1;
-            Debug.Log("ผู้เล่นชนกับไอเทมแล้ว! ❤️");
+            Debug.Log("❤️ ผู้เล่นเก็บไอเทม HP!");
+
+            // ส่งกลับ Pool แทนการทำลาย
+            SpawnManagerPool.GetInstance().Return(gameObject);
         }
     }
 }
