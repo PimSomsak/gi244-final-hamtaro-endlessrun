@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private AudioSource playerAudio;
 
     public bool gameOver = false;
+    public bool isImmortal = false;
+    private float TimeImmortal = 3;
 
     void Awake()
     {
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         hp = 5;
+
+       
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -102,16 +107,29 @@ public class PlayerController : MonoBehaviour
             isDoubleJumpable = false;
             dirtParticle.Play();
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        else if (collision.gameObject.CompareTag("Obstacle") && !isImmortal)
         {
-            
             hp--;
-            //Instantiate(explosionPrefab, expoPos, explosionPrefab.transform.rotation);
-            //Destroy(explosionPrefab,6);
             explosionParticle.Play();
-            //Destroy(collision.gameObject);
             SpawnManagerPool.GetInstance().Return(collision.gameObject);
+
+            isImmortal = true; // เปิดโหมดอมตะ
+            StartCoroutine(ResetImmortal()); // เริ่มนับเวลา 3 วินาที
         }
+    }
+
+    public void TriggerImmortal()
+    {
+        StopCoroutine("ResetImmortal"); // กันกรณีชนหลายครั้งซ้อน
+        isImmortal = true;
+        StartCoroutine(ResetImmortal());
+    }
+
+
+    IEnumerator ResetImmortal()
+    {
+        yield return new WaitForSeconds(TimeImmortal);
+        isImmortal = false; // กลับสู่สถานะปกติ
     }
 
 }
