@@ -1,10 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class MoveLeft : MonoBehaviour
 {
     public float speed = 10f;
 
     private float leftBound = -15;
+    
 
     private PlayerController playerController;
 
@@ -13,7 +15,7 @@ public class MoveLeft : MonoBehaviour
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (!playerController.gameOver && !playerController.isSprint)
@@ -28,8 +30,20 @@ public class MoveLeft : MonoBehaviour
 
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
         {
+//<<<<<<< HEAD
+//<<<<<<< HEAD
+            
+            SpawnManagerPool.GetInstance().Return(gameObject);
+//=======
             Destroy(gameObject);
             //SpawnManagerPool.GetInstance().Return(gameObject);
+//>>>>>>> Premiere
+//=======
+            Destroy(gameObject);
+            //SpawnManagerPool.GetInstance().Return(gameObject);
+//>>>>>>> Premiere
         }
+
+        
     }
 }
