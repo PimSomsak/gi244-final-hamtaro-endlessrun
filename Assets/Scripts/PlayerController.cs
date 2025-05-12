@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private InputAction jumpAction;
     public InputAction sprintAction;
+    public InputAction slowAction;
     public bool isSprint = false;
+    public bool isSlow = false;
     private bool isOnGround = true;
     private bool isDoubleJumpable = false;
 
@@ -57,7 +59,8 @@ public class PlayerController : MonoBehaviour
         Physics.gravity = new Vector3(0, -9.81f, 0);
         Physics.gravity *= gravityModifier;
         jumpAction = InputSystem.actions.FindAction("Jump");
-        sprintAction = InputSystem.actions.FindAction("Sprint");
+        sprintAction = InputSystem.actions.FindAction("Fast");
+        slowAction = InputSystem.actions.FindAction("Slow");
 
         gameOver = false;
         ImmortalCount = 0f;
@@ -95,6 +98,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             isSprint = false;
+
+        }
+
+        if (slowAction.IsPressed())
+        {
+            isSlow = true;
+
+        }
+        else
+        {
+            isSlow = false;
 
         }
 
