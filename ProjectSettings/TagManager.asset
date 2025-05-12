@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - Heart
+  - Immortal
   layers:
   - Default
   - TransparentFX

@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public AudioClip jumpSfx;
     public AudioClip crashSfx;
+    public AudioClip heartSfx;
+    public AudioClip immortalSfx;
+
 
     private Rigidbody rb;
     private InputAction jumpAction;
@@ -171,6 +174,15 @@ public class PlayerController : MonoBehaviour
             //SpawnManagerPool.GetInstance().Return(collision.gameObject);
 
         }
+        else if (collision.gameObject.CompareTag("Heart"))
+        {
+            playerAudio.PlayOneShot(heartSfx);
+        }
+        else if (collision.gameObject.CompareTag("Immortal"))
+        {
+            playerAudio.PlayOneShot(immortalSfx);
+        }
+
     }
 
     public void TriggerImmortal()

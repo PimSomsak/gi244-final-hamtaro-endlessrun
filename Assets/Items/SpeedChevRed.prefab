@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedChevRed
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 64a927c80033db0409b71cfd8df5461a, type: 3}
+      propertyPath: m_TagString
+      value: Immortal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -180,3 +184,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e5b757a811090488280dad33f083c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 5
