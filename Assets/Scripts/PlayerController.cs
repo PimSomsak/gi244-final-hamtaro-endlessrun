@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // rb.AddForce(1000 * Vector3.up);
+        Physics.gravity = new Vector3(0, -9.81f, 0); 
         Physics.gravity *= gravityModifier;
 
         jumpAction = InputSystem.actions.FindAction("Jump");
