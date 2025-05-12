@@ -30,13 +30,18 @@ public class MoveLeft : MonoBehaviour
 
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
         {
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
             
             SpawnManagerPool.GetInstance().Return(gameObject);
-=======
+//=======
             Destroy(gameObject);
             //SpawnManagerPool.GetInstance().Return(gameObject);
->>>>>>> Premiere
+//>>>>>>> Premiere
+//=======
+            Destroy(gameObject);
+            //SpawnManagerPool.GetInstance().Return(gameObject);
+//>>>>>>> Premiere
         }
 
         
