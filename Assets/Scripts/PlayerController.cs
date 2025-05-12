@@ -141,10 +141,18 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("Obstacle") && !isImmortal)
         {
             hp--;
+<<<<<<< HEAD
             explosionParticle.Play();
             SpawnManagerPool.GetInstance().Return(collision.gameObject);
 
             
+=======
+            GameObject expoFx = Instantiate(explosionPrefab, expoPos, explosionPrefab.transform.rotation);
+            Destroy(expoFx,2);
+            //explosionParticle.Play();
+            Destroy(collision.gameObject);
+            //SpawnManagerPool.GetInstance().Return(collision.gameObject);
+>>>>>>> Premiere
         }
     }
 
