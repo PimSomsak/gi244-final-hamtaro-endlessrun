@@ -12,17 +12,22 @@ public class UiManager : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject inGameUi;
 
+    public TextMeshProUGUI distanceText;
+
+
+    private PlayerController playerController;
 
     private void Awake()
     {
         Time.timeScale = 0f;
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     private void Start()
     {
         titleScreen.SetActive(true);
-        gameOverScreen.SetActive(false);
-        pauseScreen.SetActive(false);
         inGameUi.SetActive(false);
+        gameOverScreen.SetActive(false);
+        pauseScreen.SetActive(false);  
     }
     public void StartGame()
     {
@@ -35,6 +40,7 @@ public class UiManager : MonoBehaviour
         Time.timeScale = 0f;
         gameOverScreen.SetActive(true);
         inGameUi.SetActive(false);
+        distanceText.text = "" + playerController.distanceText.text.ToString();
     }
     public void Back()
     {

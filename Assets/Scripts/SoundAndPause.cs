@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SoundAndPause : MonoBehaviour
 {
-    //SoundAndPause in MainCameraComponant!
+    //SoundAndPause in MainCamera Componant!
 
     private AudioSource audioSource;
     private bool isMuted = false;

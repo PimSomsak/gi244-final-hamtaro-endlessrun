@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator playerAnim;
     private AudioSource playerAudio;
+    private UiManager uiManager;
 
     public bool gameOver = false;
     public bool isImmortal = false;
@@ -47,11 +48,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        uiManager = GameObject.Find("UiManager").GetComponent<UiManager>();
         hp = 5;
     }
 
     void Start()
     {
+        Physics.gravity = new Vector3(0, -9.81f, 0);
         Physics.gravity *= gravityModifier;
         jumpAction = InputSystem.actions.FindAction("Jump");
         sprintAction = InputSystem.actions.FindAction("Sprint");
@@ -103,6 +106,8 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetInteger("DeathType_int", 1);
             explosionParticle.Play();
             dirtParticle.Stop();
+            uiManager.OverScreen();
+            
         }
 
 
@@ -111,7 +116,7 @@ public class PlayerController : MonoBehaviour
             float currentVisualSpeed = isSprint ? visualSprintSpeed : visualRunSpeed;
             distanceTravelled += currentVisualSpeed * Time.deltaTime;
             distanceText.text = "distance: " + distanceTravelled.ToString("F0") + "M";
-            HPText.text = hp.ToString();
+            HPText.text = "Health : " + hp.ToString();
         }
 
 
@@ -143,11 +148,9 @@ public class PlayerController : MonoBehaviour
             hp--;
 
             explosionParticle.Play();
-            SpawnManagerPool.GetInstance().Return(collision.gameObject);
-
-
-
+            //SpawnManagerPool.GetInstance().Return(collision.gameObject);
             GameObject expoFx = Instantiate(explosionPrefab, expoPos, explosionPrefab.transform.rotation);
+            playerAudio.PlayOneShot(crashSfx);
             Destroy(expoFx, 2);
             //explosionParticle.Play();
             Destroy(collision.gameObject);
