@@ -38,7 +38,6 @@ public class ObstacleButtonSkill : MonoBehaviour
         imgLoad2.fillAmount = 0;
         imgLoad3.fillAmount = 0;
     }
-
    
     private void Update()
     {
@@ -60,81 +59,7 @@ public class ObstacleButtonSkill : MonoBehaviour
 
         UpdateCooldown(ref isCoolingDown, imgLoad, coolDown);
         UpdateCooldown(ref isCoolingDown2, imgLoad2, coolDown2);
-        UpdateCooldown(ref isCoolingDown3, imgLoad3, coolDown3);
-
-        /*
-        if (skill1Action.triggered && !isCoolingDown && IsPointerOverImage(imgLoad))
-        {
-            isCoolingDown = true;
-            imgLoad.fillAmount = 1f;
-
-            Instantiate(
-                obstaclePrefab,
-                spawnPos[Random.Range(0, spawnPos.Length)],
-                obstaclePrefab.transform.rotation
-            );
-        }
-
-        if (isCoolingDown)
-        {
-            imgLoad.fillAmount -= Time.deltaTime / coolDown;
-
-            if (imgLoad.fillAmount <= 0f)
-            {
-                imgLoad.fillAmount = 0f;
-                isCoolingDown = false;
-            }
-        }
-
-
-        if (skill1Action.triggered && !isCoolingDown2 && IsPointerOverImage(imgLoad2))
-        {
-            isCoolingDown2 = true;
-            imgLoad2.fillAmount = 1f;
-
-            Instantiate(
-                obstaclePrefab2,
-                spawnPos[Random.Range(0, spawnPos.Length)],
-                obstaclePrefab2.transform.rotation
-            );
-        }
-
-        if (isCoolingDown2)
-        {
-            imgLoad2.fillAmount -= Time.deltaTime / coolDown2;
-
-            if (imgLoad2.fillAmount <= 0f)
-            {
-                imgLoad2.fillAmount = 0f;
-                isCoolingDown2 = false;
-            }
-        }
-
-
-        if (skill1Action.triggered && !isCoolingDown3 && IsPointerOverImage(imgLoad3))
-        {
-            isCoolingDown3 = true;
-            imgLoad3.fillAmount = 1f;
-
-            Instantiate(
-                obstaclePrefab3,
-                spawnPos[Random.Range(0, spawnPos.Length)],
-                obstaclePrefab3.transform.rotation
-            );
-        }
-
-        if (isCoolingDown3)
-        {
-            imgLoad3.fillAmount -= Time.deltaTime / coolDown3;
-
-            if (imgLoad3.fillAmount <= 0f)
-            {
-                imgLoad3.fillAmount = 0f;
-                isCoolingDown3 = false;
-            }
-        }
-        */
-
+        UpdateCooldown(ref isCoolingDown3, imgLoad3, coolDown3);      
     }
 
     private void TriggerSkill(ref bool isCooling, Image img, GameObject prefab)
@@ -180,63 +105,4 @@ public class ObstacleButtonSkill : MonoBehaviour
         return false;
     }
 
-
-
-    /*
-    IEnumerator StartCoolDown() 
-    {
-        isCoolingDown = true;
-        Instantiate(
-            obstaclePrefab,
-            spawnPos[Random.Range(0, spawnPos.Length)],
-            obstaclePrefab.transform.rotation
-            );
-        
-        yield return new WaitForSeconds(coolDown);
-        isCoolingDown=false;
-        
-    }
-    */
-
-    /*
-    public void OnClick()
-    {
-         if (!isCoolingDown)
-        {
-            isCoolingDown = true ;
-            imgLoad.fillAmount = 1;
-            Instantiate(
-            obstaclePrefab,
-            spawnPos[Random.Range(0, spawnPos.Length)],
-            obstaclePrefab.transform.rotation
-            );
-        }
-
-        if (isCoolingDown)
-        {
-            imgLoad.fillAmount -= Time.deltaTime / coolDown;
-            if (imgLoad.fillAmount <= 0)
-            {
-                imgLoad.fillAmount = 0;
-                isCoolingDown = false ;
-            }
-        }
-    }
-    */
-
-
-    void ObstacleSpawner()
-    {
-        /*
-            Instantiate(
-            obstaclePrefab,
-            spawnPos[Random.Range(0,spawnPos.Length)],
-            obstaclePrefab.transform.rotation
-            );
-            */
-            //isCoolingDown=true;
-            //StartCoroutine(StartCoolDown());       
-    }
-    
-    
 }
