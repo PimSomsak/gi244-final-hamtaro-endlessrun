@@ -9,10 +9,7 @@ using UnityEngine.InputSystem;
 
 public class ObstacleButtonSkill : MonoBehaviour
 {
-    //public Button button;
     public InputAction skill1Action;
-    public InputAction skill2Action;
-    public InputAction skill3Action;
 
     public GameObject obstaclePrefab;
     public GameObject obstaclePrefab2;
@@ -30,11 +27,12 @@ public class ObstacleButtonSkill : MonoBehaviour
     public bool isCoolingDown3;
     public Image imgLoad3;
 
+    public GraphicRaycaster uiRaycaster;
+    public EventSystem eventSystem;
+
     public void Start()
     {
         skill1Action = InputSystem.actions.FindAction("Skill1");
-        skill2Action = InputSystem.actions.FindAction("Skill2");
-        skill3Action = InputSystem.actions.FindAction("Skill3");
 
         imgLoad.fillAmount = 0;
         imgLoad2.fillAmount = 0;
@@ -44,8 +42,28 @@ public class ObstacleButtonSkill : MonoBehaviour
    
     private void Update()
     {
+        if (skill1Action.triggered)
+        {
+            if (!isCoolingDown && IsPointerOverImage(imgLoad))
+            {
+                TriggerSkill(ref isCoolingDown, imgLoad, obstaclePrefab);
+            }
+            else if (!isCoolingDown2 && IsPointerOverImage(imgLoad2))
+            {
+                TriggerSkill(ref isCoolingDown2, imgLoad2, obstaclePrefab2);
+            }
+            else if (!isCoolingDown3 && IsPointerOverImage(imgLoad3))
+            {
+                TriggerSkill(ref isCoolingDown3, imgLoad3, obstaclePrefab3);
+            }
+        }
 
-        if (skill1Action.triggered && !isCoolingDown)
+        UpdateCooldown(ref isCoolingDown, imgLoad, coolDown);
+        UpdateCooldown(ref isCoolingDown2, imgLoad2, coolDown2);
+        UpdateCooldown(ref isCoolingDown3, imgLoad3, coolDown3);
+
+        /*
+        if (skill1Action.triggered && !isCoolingDown && IsPointerOverImage(imgLoad))
         {
             isCoolingDown = true;
             imgLoad.fillAmount = 1f;
@@ -69,7 +87,7 @@ public class ObstacleButtonSkill : MonoBehaviour
         }
 
 
-        if (skill2Action.triggered && !isCoolingDown2)
+        if (skill1Action.triggered && !isCoolingDown2 && IsPointerOverImage(imgLoad2))
         {
             isCoolingDown2 = true;
             imgLoad2.fillAmount = 1f;
@@ -93,7 +111,7 @@ public class ObstacleButtonSkill : MonoBehaviour
         }
 
 
-        if (skill3Action.triggered && !isCoolingDown3)
+        if (skill1Action.triggered && !isCoolingDown3 && IsPointerOverImage(imgLoad3))
         {
             isCoolingDown3 = true;
             imgLoad3.fillAmount = 1f;
@@ -115,11 +133,54 @@ public class ObstacleButtonSkill : MonoBehaviour
                 isCoolingDown3 = false;
             }
         }
-
+        */
 
     }
 
-    
+    private void TriggerSkill(ref bool isCooling, Image img, GameObject prefab)
+    {
+        isCooling = true;
+        img.fillAmount = 1f;
+
+        Instantiate(
+            prefab,
+            spawnPos[Random.Range(0, spawnPos.Length)],
+            prefab.transform.rotation
+        );
+    }
+
+    private void UpdateCooldown(ref bool isCooling, Image img, float cd)
+    {
+        if (isCooling)
+        {
+            img.fillAmount -= Time.deltaTime / cd;
+            if (img.fillAmount <= 0f)
+            {
+                img.fillAmount = 0f;
+                isCooling = false;
+            }
+        }
+    }
+
+    private bool IsPointerOverImage(Image targetImage)
+    {
+        PointerEventData pointerData = new PointerEventData(eventSystem);
+        pointerData.position = Mouse.current.position.ReadValue();
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        uiRaycaster.Raycast(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject == targetImage.gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     /*
     IEnumerator StartCoolDown() 

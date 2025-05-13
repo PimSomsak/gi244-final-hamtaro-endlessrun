@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill2",
+                    "name": "Slow",
                     "type": "Button",
                     "id": "987f25d7-7187-4f05-9f9f-aaffd6f471a5",
                     "expectedControlType": "",
@@ -105,7 +105,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Skill3",
+                    "name": "Fast",
                     "type": "Button",
                     "id": "210daec7-e199-4a61-afe7-2073202415ed",
                     "expectedControlType": "",
@@ -514,22 +514,22 @@
                 {
                     "name": "",
                     "id": "b196ddbb-b17d-442e-bbf4-ef7c69992fe8",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Skill2",
+                    "action": "Slow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "fa9677bc-cf1d-4077-9ac8-a1f403ec473b",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Skill3",
+                    "action": "Fast",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
